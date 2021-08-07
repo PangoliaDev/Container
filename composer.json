@@ -11,9 +11,15 @@
     "php": ">=7.1",
     "level-2/dice": "^4.0"
   },
-  "license": [
-    "MIT"
-  ],
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+    "wp-coding-standards/wpcs": "*",
+    "automattic/phpcs-neutron-ruleset": "^3.3",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "szepeviktor/phpstan-wordpress": "^0.7.5",
+    "php-stubs/wordpress-stubs": "^5.7"
+  },
+  "license": "BSD-2-Clause",
   "authors": [
     {
       "name": "Pangolia",

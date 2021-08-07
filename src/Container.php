@@ -57,7 +57,7 @@ abstract class Container extends Autowiring {
 		$this->psr4_prefixes = $psr4_prefixes;
 		$this->namespace = $config['namespace'] ?? '';
 		$this->cache_folder = $config['cache_folder'] ?? 'build';
-		$this->environment = $config['environment'] ?? 'prod';
+		$this->environment = $config['environment'] ?? 'dev';
 		$this->path = \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
 		$this->container = new \Dice\Dice();
 	}
