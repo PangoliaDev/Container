@@ -1,6 +1,6 @@
 {
   "name": "pangolia/container",
-  "description": "Dice Container",
+  "description": "A Dice wrapper to auto-register and auto-instantiate objects.",
   "version": "0.1.0",
   "homepage": "https://pangolia.com",
   "scripts": {
