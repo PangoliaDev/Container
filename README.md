@@ -2,7 +2,7 @@
 
 [![License](http://poser.pugx.org/pangolia/container/license)](https://packagist.org/packages/pangolia/container)
 
-A Dice wrapper to auto-register and auto-instantiate objects. Primarily created for WordPress development but can be used for any other developments.
+A wrapper for Dice (https://github.com/Level-2/Dice) to auto-register and auto-instantiate objects. Primarily created for WordPress development but can be used for any other developments.
 
 ## Usage
 (See container example in ``src/ExampleContainer.php``)
