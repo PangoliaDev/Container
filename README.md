@@ -1,8 +1,8 @@
-# Dice (Dependency Injection Container) Wrapper
+# Dice (Dependency Injection Container) Wrapper for WordPress
 
 [![License](http://poser.pugx.org/pangolia/container/license)](https://packagist.org/packages/pangolia/container)
 
-A wrapper for Dice (https://github.com/Level-2/Dice) to auto-register and auto-instantiate objects. Primarily created for WordPress development but can be used for any other developments.
+A wrapper for Dice (https://github.com/Level-2/Dice) to auto-register and auto-instantiate objects. Primarily created for WordPress development; can be used for plugins & themes.
 
 ## Installation
 Use composer to install the package.
