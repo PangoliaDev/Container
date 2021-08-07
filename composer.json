@@ -1,0 +1,21 @@
+{
+  "name": "pangolia/container",
+  "description": "Dice Container",
+  "version": "0.1.0",
+  "homepage": "https://pangolia.com",
+  "scripts": {
+    "phpcs": "./vendor/bin/phpcs --standard=./.config/phpcs.xml",
+    "phpstan": "./vendor/bin/phpstan analyze -c ./.config/phpstan.neon --memory-limit 99"
+  },
+  "require": {
+    "php": ">=7.1",
+    "level-2/dice": "^4.0"
+  },
+  "authors": [
+    {
+      "name": "Pangolia",
+      "email": "brandon@pangolia.com",
+      "homepage": "https://pangolia.com"
+    }
+  ]
+}
