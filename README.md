@@ -4,6 +4,12 @@
 
 A wrapper for Dice (https://github.com/Level-2/Dice) to auto-register and auto-instantiate objects. Primarily created for WordPress development but can be used for any other developments.
 
+## Installation
+Use composer to install the package.
+````bash
+composer require pangolia/container
+````
+
 ## Usage
 (See container example in ``src/ExampleContainer.php``)
 
