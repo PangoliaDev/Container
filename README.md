@@ -1,5 +1,7 @@
 # Dice (Dependency Injection Container) Wrapper
 
+[![License](http://poser.pugx.org/pangolia/container/license)](https://packagist.org/packages/pangolia/container)
+
 A Dice wrapper to auto-register and auto-instantiate objects.
 
 ## Usage
