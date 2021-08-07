@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WPStrap ruleset">
+<ruleset name="Pangolia ruleset">
     <description>Ruleset for pangolia/container.</description>
 
     <file>src/</file>
@@ -12,7 +12,7 @@
     <arg name="extensions" value="php"/>
 
     <!-- Check for PHP cross-version compatibility. -->
-    <config name="testVersion" value="7.0-"/>
+    <config name="testVersion" value="7.1-"/>
     <rule ref="PHPCompatibilityWP">
         <include-pattern>*\.php$</include-pattern>
     </rule>
@@ -24,13 +24,15 @@
 
     <!-- WordPress coding standards. -->
     <!-- https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties -->
-    <config name="minimum_supported_wp_version" value="5.5"/>
+    <config name="minimum_supported_wp_version" value="5.6"/>
     <rule ref="WordPress">
         <!-- Exclude as plugin adheres to the PSR-4 standard. -->
         <exclude name="WordPress.Files.FileName"/>
         <exclude name="NeutronStandard.AssignAlign.DisallowAssignAlign.Aligned"/>
          <!-- Exclude as return types are invalid for mixed returns. -->
         <exclude name="NeutronStandard.Functions.TypeHint.NoReturnType"/>
+
+        <exclude name="WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents"/>
     </rule>
 
     <!--https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties#custom-input-sanitization-functions-->
@@ -62,7 +64,7 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <property name="text_domain" type="array">
-                <element value="wpstrap"/>
+                <element value="pangolia"/>
                 <element value="library-textdomain"/>
             </property>
         </properties>
@@ -73,7 +75,7 @@
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
             <property name="prefixes" type="array">
-                <element value="Wpstrap"/>
+                <element value="Pangolia"/>
             </property>
         </properties>
     </rule>
@@ -89,6 +91,10 @@
     <!-- These are a set of modern (PHP >7) linting guidelines for WordPress development. -->
     <rule ref="NeutronRuleset">
         <exclude name="NeutronStandard.Globals.DisallowGlobalFunctions.GlobalFunctions"/>
+    </rule>
+    <!-- Include the Neutron standard. -->
+    <rule ref="NeutronStandard">
+        <exclude name="NeutronStandard.Functions.DisallowCallUserFunc.CallUserFunc"/>
     </rule>
     <!-- https://github.com/squizlabs/PHP_CodeSniffer/issues/1578 -->
     <rule ref="PEAR.Functions.FunctionCallSignature"/>

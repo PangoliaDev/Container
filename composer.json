@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "homepage": "https://pangolia.com",
   "scripts": {
-    "phpcs": "./vendor/bin/phpcs --standard=./.config/phpcs.xml",
-    "phpstan": "./vendor/bin/phpstan analyze -c ./.config/phpstan.neon --memory-limit 99"
+    "phpcs": "./vendor/bin/phpcs --standard=./phpcs.xml",
+    "phpstan": "./vendor/bin/phpstan analyze -c ./phpstan.neon --memory-limit 99"
   },
   "require": {
     "php": ">=7.1",

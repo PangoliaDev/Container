@@ -33,16 +33,16 @@ abstract class Autowiring {
 	 * Prepare the autowired services, this will get an array with services based on the
 	 * namespace hierarchies that we define in the services() method & composer's autoloader
 	 *
-	 * @param $psr4Prefixes
-	 * @param $services
-	 * @return array
+	 * @param array<string, mixed> $psr4_prefixes
+	 * @param array<int, string>   $services
+	 * @return array<int, string>
 	 * @since 0.1.0
 	 */
-	protected function prepare_autowired_services( $psr4Prefixes, $services ): array {
+	protected function prepare_autowired_services( array $psr4_prefixes, array $services ): array {
 		// Will get all the project classes from the project dir using the
 		// namespace and Composer's autoloader
 		$this->find_psr4_classes(
-			$psr4Prefixes[ $this->namespace . '\\' ][0] ?? ''
+			$psr4_prefixes[ $this->namespace . '\\' ][0] ?? ''
 		);
 
 		// Prepare autowired services array
@@ -68,10 +68,11 @@ abstract class Autowiring {
 	/**
 	 * Collects the classes from a namespace path.
 	 *
+	 * @param string $path
 	 * @return void
 	 * @since 0.1.0
 	 */
-	private function find_psr4_classes( $path ) {
+	private function find_psr4_classes( string $path ) {
 		if ( \is_dir( $path ) ) {
 			$files = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $path ) );
 			foreach ( $files as $file ) {

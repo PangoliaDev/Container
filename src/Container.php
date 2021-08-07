@@ -59,9 +59,11 @@ abstract class Container extends Autowiring {
 	/**
 	 * Constructor
 	 *
+	 * @param array<string, mixed> $config
+	 * @param array<string, mixed> $psr4_prefixes
 	 * @since 0.1.0
 	 */
-	public function __construct( $config, $psr4_prefixes ) {
+	public function __construct( array $config, array $psr4_prefixes ) {
 		$this->psr4_prefixes = $psr4_prefixes;
 		$this->namespace = $config['namespace'] ?? '';
 		$this->cache_folder = $config['cache_folder'] ?? 'build';
@@ -73,15 +75,18 @@ abstract class Container extends Autowiring {
 	/**
 	 * Register the project
 	 *
+	 * @param string $register_hook
+	 * @return void
 	 * @since 0.1.0
 	 */
-	public function register( $register_hook = 'after_setup_theme' ) {
+	public function register( string $register_hook = 'after_setup_theme' ) {
 		\add_action( $register_hook, [ $this, 'register_services' ] );
 	}
 
 	/**
 	 * Register Services
 	 *
+	 * @return void
 	 * @since 0.1.0
 	 */
 	public function register_services() {
@@ -100,7 +105,7 @@ abstract class Container extends Autowiring {
 	/**
 	 * Get the autowired services.
 	 *
-	 * @return array
+	 * @return array<int, string>
 	 * @since 0.1.0
 	 */
 	private function get_autowired_services(): array {
@@ -204,30 +209,51 @@ abstract class Container extends Autowiring {
 	 * @since 0.1.0
 	 */
 	private function set_cache( string $path, $callback, string $file ) {
-		if ( ! \is_dir( $path ) ) \mkdir( $path );
-		\file_put_contents( $file, $this->render_php( $data = \is_callable( $callback )
-			? $callback()
-			: $callback
-		) );
+		if ( ! \is_dir( $path ) ) {
+			\mkdir( $path );
+		}
+
+		$data = \is_callable( $callback )
+			? \call_user_func( $callback )
+			: $callback;
+
+		\file_put_contents( $file, $this->render_php( $data ) );
+
 		return $data;
 	}
 
 	/**
 	 * Remove all cache files
 	 *
+	 * @return void
 	 * @since 0.1.0
 	 */
 	public function remove_cache() {
 		$path = $this->get_cache_path();
+
 		if ( \is_dir( $path ) ) {
-			$files = \glob( $path . '/*' );
-			foreach ( $files as $file ) {
+			foreach ( $this->get_path_names( $path . '/*' ) as $file ) {
 				if ( \is_file( $file ) ) {
 					\unlink( $file );
 				}
 			}
+
 			\rmdir( $path );
 		}
+	}
+
+	/**
+	 * Find path names matching a pattern
+	 *
+	 * @param string $pattern
+	 * @return array<int,string>
+	 */
+	private function get_path_names( string $pattern ): array {
+		$path_names = \glob( $pattern );
+
+		return $path_names !== false
+			? $path_names
+			: [];
 	}
 
 	/**
