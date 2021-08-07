@@ -83,9 +83,9 @@ class Container extends BuildContainer {
 }
 ````
 Combined with Dice's autowiring functionalities + Composer's Autoloader:
-- All files will be automatically included (Composer's Autoloader)
-- All classes inside the namespace hierarchies will be automatically instantiated and registered when creating and adding new classes & files (Container)
-- All dependencies will be automatically injected (Dice).
+- All files will be automatically included 
+- All classes inside the namespace hierarchies will be automatically instantiated and registered when creating and adding new classes & files
+- All dependencies will be automatically injected 
 
 When instantiating the container you have to pass 2 arguments:
 - ``$config``(array): An array of configurations
