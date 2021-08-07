@@ -11,6 +11,7 @@ abstract class Container extends Autowiring {
 	/**
 	 * Services created from the container.
 	 *
+	 * @since 0.1.0
 	 * @var mixed
 	 */
 	public $services = [];
@@ -18,6 +19,7 @@ abstract class Container extends Autowiring {
 	/**
 	 * Composer PSR4 prefixes.
 	 *
+	 * @since 0.1.0
 	 * @var array<string, array>
 	 */
 	protected $psr4_prefixes;
@@ -25,6 +27,7 @@ abstract class Container extends Autowiring {
 	/**
 	 * The Dice instance.
 	 *
+	 * @since 0.1.0
 	 * @var \Dice\Dice
 	 */
 	protected $container;
@@ -32,6 +35,7 @@ abstract class Container extends Autowiring {
 	/**
 	 * The project root path.
 	 *
+	 * @since 0.1.0
 	 * @var string
 	 */
 	private $path;
@@ -39,6 +43,7 @@ abstract class Container extends Autowiring {
 	/**
 	 * The project's cache folder
 	 *
+	 * @since 0.1.0
 	 * @var string
 	 */
 	private $cache_folder;
@@ -46,12 +51,15 @@ abstract class Container extends Autowiring {
 	/**
 	 * The project's environment
 	 *
+	 * @since 0.1.0
 	 * @var string (prod|dev)
 	 */
 	protected $environment;
 
 	/**
 	 * Constructor
+	 *
+	 * @since 0.1.0
 	 */
 	public function __construct( $config, $psr4_prefixes ) {
 		$this->psr4_prefixes = $psr4_prefixes;
@@ -64,6 +72,8 @@ abstract class Container extends Autowiring {
 
 	/**
 	 * Register the project
+	 *
+	 * @since 0.1.0
 	 */
 	public function register( $register_hook = 'after_setup_theme' ) {
 		\add_action( $register_hook, [ $this, 'register_services' ] );
@@ -71,6 +81,8 @@ abstract class Container extends Autowiring {
 
 	/**
 	 * Register Services
+	 *
+	 * @since 0.1.0
 	 */
 	public function register_services() {
 		foreach ( $this->get_autowired_services() as $service ) {
@@ -89,6 +101,7 @@ abstract class Container extends Autowiring {
 	 * Get the autowired services.
 	 *
 	 * @return array
+	 * @since 0.1.0
 	 */
 	private function get_autowired_services(): array {
 		// Remove cache if we're in dev environment
@@ -126,6 +139,7 @@ abstract class Container extends Autowiring {
 	 * The services are being cached, in order to delete the cache set environment to dev or use remove_cache();
 	 *
 	 * @return string[]|array<string, string>
+	 * @since 0.1.0
 	 */
 	abstract protected function services(): array;
 
@@ -140,6 +154,7 @@ abstract class Container extends Autowiring {
 	 * The rules are being cached, in order to delete the cache set environment to dev or use remove_cache();
 	 *
 	 * @return array<string, mixed>
+	 * @since 0.1.0
 	 */
 	protected function rules(): array {
 		return [];
@@ -155,6 +170,7 @@ abstract class Container extends Autowiring {
 	 * Returns the path where our cached files will be saved.
 	 *
 	 * @return string
+	 * @since 0.1.0
 	 */
 	private function get_cache_path(): string {
 		return \trailingslashit( $this->path ) . \trailingslashit( $this->cache_folder ) . $this::CACHE_FOLDER;
@@ -167,6 +183,7 @@ abstract class Container extends Autowiring {
 	 * @param callable|mixed|false $callback  Callback function to save data in case nothing is found.
 	 *                                        This can also be the value itself.
 	 * @return mixed
+	 * @since 0.1.0
 	 */
 	private function get_cache( string $cache_key, $callback ) {
 		$path = $this->get_cache_path();
@@ -184,6 +201,7 @@ abstract class Container extends Autowiring {
 	 *                                       or the data itself.
 	 * @param string               $file     The full file path.
 	 * @return mixed
+	 * @since 0.1.0
 	 */
 	private function set_cache( string $path, $callback, string $file ) {
 		if ( ! \is_dir( $path ) ) \mkdir( $path );
@@ -196,6 +214,8 @@ abstract class Container extends Autowiring {
 
 	/**
 	 * Remove all cache files
+	 *
+	 * @since 0.1.0
 	 */
 	public function remove_cache() {
 		$path = $this->get_cache_path();
@@ -216,7 +236,7 @@ abstract class Container extends Autowiring {
 	 *
 	 * @param mixed $data
 	 * @return string
-	 * @since 0.5.0
+	 * @since 0.1.0
 	 */
 	private function render_php( $data ): string {
 		$php = '<?php ' . PHP_EOL;
@@ -230,7 +250,7 @@ abstract class Container extends Autowiring {
 	 * Render php docs for the cached files.
 	 *
 	 * @return string
-	 * @since 0.5.0
+	 * @since 0.1.0
 	 */
 	private function render_php_doc(): string {
 		$php_doc = '/**' . PHP_EOL;
@@ -252,6 +272,7 @@ abstract class Container extends Autowiring {
 	 * @param string $id Identifier of the entry to look for.
 	 *
 	 * @return mixed Entry.
+	 * @since   0.1.0
 	 * @throws NotFoundException
 	 *
 	 * @example $container->get(ProjectClass::class)
@@ -271,6 +292,7 @@ abstract class Container extends Autowiring {
 	 * @param string $id Identifier of the entry to look for.
 	 *
 	 * @return bool
+	 * @since   0.1.0
 	 *
 	 * @example $container->has(ProjectClass::class)
 	 */

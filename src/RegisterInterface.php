@@ -3,9 +3,6 @@ declare( strict_types = 1 );
 
 namespace Pangolia\Container;
 
-/**
- * Interface RegisterInterface
- */
 interface RegisterInterface {
 
 	/**
@@ -17,7 +14,7 @@ interface RegisterInterface {
 	 *
 	 * @return void
 	 *
-	 * @since 1.0.1
+	 * @since 0.1.0
 	 */
 	public function register();
 }

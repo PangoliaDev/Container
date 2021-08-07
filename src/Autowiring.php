@@ -3,14 +3,12 @@ declare( strict_types = 1 );
 
 namespace Pangolia\Container;
 
-/**
- * Auto wiring should only be done in dev environment or only once prior to being cached.
- */
 abstract class Autowiring {
 
 	/**
 	 * Project's classes found from PSR4Prefixes.
 	 *
+	 * @since 0.1.0
 	 * @var string[]|array<string, mixed>
 	 */
 	protected $psr4_classes = [];
@@ -18,6 +16,7 @@ abstract class Autowiring {
 	/**
 	 * Dice rules.
 	 *
+	 * @since 0.1.0
 	 * @var array<string, mixed>
 	 */
 	protected $rules = [];
@@ -25,6 +24,7 @@ abstract class Autowiring {
 	/**
 	 * Project namespace.
 	 *
+	 * @since 0.1.0
 	 * @var string
 	 */
 	protected $namespace;
@@ -36,6 +36,7 @@ abstract class Autowiring {
 	 * @param $psr4Prefixes
 	 * @param $services
 	 * @return array
+	 * @since 0.1.0
 	 */
 	protected function prepare_autowired_services( $psr4Prefixes, $services ): array {
 		// Will get all the project classes from the project dir using the
@@ -68,6 +69,7 @@ abstract class Autowiring {
 	 * Collects the classes from a namespace path.
 	 *
 	 * @return void
+	 * @since 0.1.0
 	 */
 	private function find_psr4_classes( $path ) {
 		if ( \is_dir( $path ) ) {
@@ -93,6 +95,7 @@ abstract class Autowiring {
 	 * Get all the relevant classes from the PSR4 classmap.
 	 *
 	 * @return string[]
+	 * @since 0.1.0
 	 */
 	private function find_relevant_classes(): array {
 		$relevant_classes = [];
