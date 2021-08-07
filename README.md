@@ -2,7 +2,7 @@
 
 [![License](http://poser.pugx.org/pangolia/container/license)](https://packagist.org/packages/pangolia/container)
 
-A Dice wrapper to auto-register and auto-instantiate objects.
+A Dice wrapper to auto-register and auto-instantiate objects. Primarily created for WordPress development but can be used for any other developments.
 
 ## Usage
 (See container example in ``src/ExampleContainer.php``)
@@ -35,7 +35,12 @@ class Setup implements RegisterInterface {
 }
 ````
 
-In the services() method of the container (see below), you can set the namespace hierarchies, and it will auto-find and auto-instantiate all the classes within these folders, as well as call the register() method if it implements the RegisterInterface (optional) and auto-create a "shared" dice rule, so it will be instantiated only once even if it's being injected multiple times. You can use the rules() method to set your own Dice rules:
+In the services() method of the container (see below), you can set the namespace hierarchies, and it will: 
+- Auto-find and auto-instantiate all the classes within these folders
+- Call the register() method if the class implements the RegisterInterface (optional) which holds the WordPress actions and filters - effectively replacing the need to manually add them in one place
+- Auto-create a "shared" dice rule, so the class will be instantiated only once, even if it's being injected multiple times. 
+
+You can use the rules() method to set your own Dice rules:
 
 ````php
 namespace ProjectNamespace\Container;
@@ -102,7 +107,7 @@ When you have a folder structure like this:
 - ``src`` (which includes your project's source files)
 - ``build``(which includes your project's generated build files)
 
-And the container's environment is set to "prod" it will cache the results and create 2 files in the "build" folder (as defined in the $config array)
+And the container's environment is set to "prod" it will cache the results and create 2 files in the "build" folder (as defined in the ``$config`` array)
 - ``build/container/services.php`` - returns an array list of all the classes we want to instantiate based on the services() method
 - ``build/container/rules.php`` - returns an array list of all of our rules
 

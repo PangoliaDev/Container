@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="WPStrap ruleset">
-    <description>Ruleset for the WPStrap.</description>
+    <description>Ruleset for pangolia/container.</description>
 
     <file>src/</file>
 
