@@ -11,6 +11,9 @@
     "php": ">=7.1",
     "level-2/dice": "^4.0"
   },
+  "license": [
+    "MIT"
+  ],
   "authors": [
     {
       "name": "Pangolia",
