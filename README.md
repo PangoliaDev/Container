@@ -22,7 +22,7 @@ If you have a project folder that contains the following classes in the followin
 - ``src/Module/ModuleB/Module.php ``
 - ``src/Module/ModuleB/Folder/Helper.php``
 
-And each has the following class structure:
+Let's say that each has the following class structure:
 
 ````php
 namespace ProjectNamespace\Core;
