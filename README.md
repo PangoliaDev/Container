@@ -13,7 +13,7 @@ composer require pangolia/container
 ## Usage
 (See container example in ``src/ExampleContainer.php``)
 
-If you have a project folder that contains the following classes in the following PSR-4 compliant directory structure  with the namespace ``ProjectNamespace``:
+Let's say you have a project folder that contains the following classes in the following PSR-4 compliant directory structure  with the namespace ``ProjectNamespace``:
 - ``src/Core/Config.php``
 - ``src/Core/Setup.php``
 - ``src/Cli/ProjectCli.php``
@@ -22,7 +22,7 @@ If you have a project folder that contains the following classes in the followin
 - ``src/Module/ModuleB/Module.php ``
 - ``src/Module/ModuleB/Folder/Helper.php``
 
-Let's say that each has the following class structure:
+And that each has the following class structure:
 
 ````php
 namespace ProjectNamespace\Core;
