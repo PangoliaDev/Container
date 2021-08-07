@@ -1,6 +1,6 @@
-# Dice Wrapper & Container
+# Dice (Dependency Injection Container) Wrapper
 
-A Dice wrapper and container to register and auto-instantiate objects.
+A Dice wrapper to auto-register and auto-instantiate objects.
 
 ## Usage
 (See container example in ``src/ExampleContainer.php``)
@@ -104,7 +104,7 @@ And the container's environment is set to "prod" it will cache the results and c
 - ``build/container/services.php`` - returns an array list of all the classes we want to instantiate based on the services() method
 - ``build/container/rules.php`` - returns an array list of all of our rules
 
-The container will then use these lists to instantiate the classes and set the rules so there are no performance drawbacks. When adding new classes & files then you have to set the environment back to "dev" so it will delete all the cache files (or your can just delete the cache files yourself manually)
+The container will then use these lists to instantiate the classes and set the rules so there are no performance drawbacks. When adding new classes & files then you have to set the environment back to "dev" so it will delete all the cached files (or your can just delete the cached files yourself manually)
 
 ## License
 See the [LICENSE](https://github.com/pattisahusiwa/dice-wrapper/blob/master/LICENSE) file.
