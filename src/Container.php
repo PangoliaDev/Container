@@ -225,21 +225,24 @@ abstract class Container extends Autowiring {
 	/**
 	 * Remove all cache files
 	 *
-	 * @return void
+	 * @return array<string, bool>
 	 * @since 0.1.0
 	 */
-	public function remove_cache() {
+	public function remove_cache(): array {
 		$path = $this->get_cache_path();
+		$deleted = [];
 
 		if ( \is_dir( $path ) ) {
 			foreach ( $this->get_path_names( $path . '/*' ) as $file ) {
 				if ( \is_file( $file ) ) {
-					\unlink( $file );
+					$deleted[ $file ] = \unlink( $file );
 				}
 			}
 
-			\rmdir( $path );
+			$deleted[ $path ] = \rmdir( $path );
 		}
+
+		return $deleted;
 	}
 
 	/**
