@@ -32,7 +32,7 @@ use Pangolia\Container\RegisterInterface;
 class Setup implements RegisterInterface {
 
     public function __construct() {
-     // Register your dependencies here
+     // Register your dependencies & class properties here
     }
     
     public function register(){
