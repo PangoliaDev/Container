@@ -211,6 +211,7 @@ abstract class Container extends Autowiring {
 	private function set_cache( string $path, $callback, string $file ) {
 		if ( ! \is_dir( $path ) ) {
 			\mkdir( $path );
+			\chmod( $path, 0777 );
 		}
 
 		$data = \is_callable( $callback )
@@ -218,6 +219,7 @@ abstract class Container extends Autowiring {
 			: $callback;
 
 		\file_put_contents( $file, $this->render_php( $data ) );
+		\chmod( $file, 0777 );
 
 		return $data;
 	}
