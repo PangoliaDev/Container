@@ -96,7 +96,7 @@ abstract class Container extends Autowiring {
 			$this->services[ $service ] = $this->container->create( $service );
 
 			// Register the registrable.
-			if ( $this->services[ $service ] instanceof RegisterInterface ) {
+			if ( $this->services[ $service ] instanceof Registrable ) {
 				$this->services[ $service ]->register();
 			}
 		}

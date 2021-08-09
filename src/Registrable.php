@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Pangolia\Container;
 
-interface RegisterInterface {
+interface Registrable {
 
 	/**
 	 * Register the object with the WordPress system.

@@ -27,9 +27,9 @@ And that each has the following class structure:
 ````php
 namespace ProjectNamespace\Core;
 
-use Pangolia\Container\RegisterInterface;
+use Pangolia\Container\Registrable;
 
-class Setup implements RegisterInterface {
+class Setup implements Registrable {
 
     public function __construct() {
      // Register your dependencies & class properties here
@@ -43,7 +43,7 @@ class Setup implements RegisterInterface {
 
 In the services() method of the container (see below), you can set the namespace hierarchies, and it will: 
 - Auto-find and auto-instantiate all the classes within these folders
-- Call the register() method if the class implements the RegisterInterface (optional) which holds the WordPress actions and filters - effectively replacing the need to manually add them in one place
+- Call the register() method if the class implements the Registrable (optional) which holds the WordPress actions and filters - effectively replacing the need to manually add them in one place
 - Auto-create a "shared" dice rule, so the class will be instantiated only once, even if it's being injected multiple times. 
 
 You can use the rules() method to set your own Dice rules:
