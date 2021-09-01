@@ -7,6 +7,9 @@ abstract class Container extends Autowiring {
 	const RULES = 'rules';
 	const SERVICES = 'services';
 	const CACHE_FOLDER = 'container';
+	const PROD = 'prod';
+	const DEV = 'dev';
+	const BUILD = 'build';
 
 	/**
 	 * Services created from the container.
@@ -66,8 +69,8 @@ abstract class Container extends Autowiring {
 	public function __construct( array $config, array $psr4_prefixes ) {
 		$this->psr4_prefixes = $psr4_prefixes;
 		$this->namespace = $config['namespace'] ?? '';
-		$this->cache_folder = $config['cache_folder'] ?? 'build';
-		$this->environment = $config['environment'] ?? 'dev';
+		$this->cache_folder = $config['cache_folder'] ?? static::BUILD;
+		$this->environment = $config['environment'] ?? static::DEV;
 		$this->path = \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
 		$this->container = new \Dice\Dice();
 	}
@@ -90,7 +93,7 @@ abstract class Container extends Autowiring {
 	 * @since 0.1.0
 	 */
 	public function register_services() {
-		foreach ( $this->get_autowired_services() as $service ) {
+		foreach ( $this->get_services() as $service ) {
 
 			// Create service.
 			$this->services[ $service ] = $this->container->create( $service );
@@ -106,33 +109,41 @@ abstract class Container extends Autowiring {
 	 * Get the autowired services.
 	 *
 	 * @return array<int, string>
-	 * @since 0.1.0
+	 * @since 0.2.0
 	 */
-	private function get_autowired_services(): array {
-		// Remove cache if we're in dev environment
-		if ( $this->environment === 'dev' ) {
+	private function get_services(): array {
+		if ( $this->environment === static::DEV ) {
 			$this->remove_cache();
 		}
 
-		// Cache the services
-		$autowired_services = $this->get_cache( $this::SERVICES, function () {
-			// Set the self-defined rules
-			$this->rules = $this->rules();
-
+		$services = $this->get_cache( $this::SERVICES, function () {
 			// Prepare the autowired services, this will get an array with classes based on the namespace
 			// hierarchies that we define in the services() method & the project folder from composer's autoloader
 			return $this->prepare_autowired_services( $this->psr4_prefixes, $this->services() );
 		} );
 
-		// Cache the rules
-		$this->rules = $this->get_cache( $this::RULES, function () {
-			return $this->rules;
-		} );
-
 		// Add rules to Dice.
-		$this->container = $this->container->addRules( $this->rules );
+		$this->container = $this->container->addRules( $this->resolve_rules( $services ) );
 
-		return $autowired_services;
+		return $services;
+	}
+
+	/**
+	 * Resolve and get the rules
+	 *
+	 * @param array<int, string> $services
+	 * @return array<string, mixed>
+	 * @since 0.2.0
+	 */
+	private function resolve_rules( array $services ): array {
+		return array_replace_recursive(
+			array_fill_keys(
+				$services,
+				// Add "shared" rule so the service will only instantiate once, even when its being injected,
+				// this can get overwritten by the shared value set in the rules() method
+				[ 'shared' => true ]
+			), $this->rules()
+		);
 	}
 
 	/**

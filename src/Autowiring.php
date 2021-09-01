@@ -14,14 +14,6 @@ abstract class Autowiring {
 	protected $psr4_classes = [];
 
 	/**
-	 * Dice rules.
-	 *
-	 * @since 0.1.0
-	 * @var array<string, mixed>
-	 */
-	protected $rules = [];
-
-	/**
 	 * Project namespace.
 	 *
 	 * @since 0.1.0
@@ -55,10 +47,6 @@ abstract class Autowiring {
 			foreach ( $this->find_relevant_classes() as $project_class ) {
 				if ( \substr( $project_class, 0, \strlen( $service ) ) === $service ) {
 					$autowired_services[] = $project_class;
-
-					// Add "shared" rule so the service will only instantiate once,
-					// even when its being injected
-					$this->rules[ $project_class ]['shared'] = true;
 				}
 			}
 		}

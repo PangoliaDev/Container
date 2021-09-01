@@ -2,7 +2,7 @@
 
 [![License](http://poser.pugx.org/pangolia/container/license)](https://packagist.org/packages/pangolia/container)
 
-A wrapper for Dice (https://github.com/Level-2/Dice) to auto-register and auto-instantiate objects. Primarily created for WordPress development; can be used for plugins & themes.
+A small wrapper for Dice (https://github.com/Level-2/Dice) to auto-register and auto-instantiate objects. Primarily created for WordPress development; can be used for plugins & themes.
 
 ## Installation
 Use composer to install the package.
@@ -43,7 +43,7 @@ class Setup implements Registrable {
 
 In the services() method of the container (see below), you can set the namespace hierarchies, and it will: 
 - Auto-find and auto-instantiate all the classes within these folders
-- Call the register() method if the class implements the Registrable (optional) which holds the WordPress actions and filters - effectively replacing the need to manually add them in one place
+- Call the register() method if the class implements the Registrable interface which holds the WordPress actions and filters - effectively replacing the need to manually add them in one place
 - Auto-create a "shared" dice rule, so the class will be instantiated only once, even if it's being injected multiple times. 
 
 You can use the rules() method to set your own Dice rules:
@@ -112,17 +112,13 @@ if ( $container->has( 'class_name' ) ) {
 }
 ````
 
-When you have a folder structure like this:
+Let's say you have a folder structure like this:
 - ``src`` (which includes your project's source files)
 - ``build``(which includes your project's generated build files)
 
-And the container's environment is set to "prod" it will cache the results and create 2 files in the "build" folder (as defined in the ``$config`` array)
+When the container's environment is set to "prod" it will cache the results and create a file in the "build" folder (as defined in the ``$config`` array)
 - ``build/container/services.php`` - returns an array list of all the classes we want to instantiate based on the services() method
-- ``build/container/rules.php`` - returns an array list of all of our rules
 
-The container will then use these lists to instantiate the classes and set the rules so there are no performance drawbacks on production. 
+The container will then use this list to instantiate and register the classes so there are no performance drawbacks on production. 
 
 When adding new classes & files then you have to set the environment back to "dev" so it will delete all the cached files on the initial load (or your can just delete the cached files yourself manually)
-
-## License
-See the [LICENSE](https://github.com/pattisahusiwa/dice-wrapper/blob/master/LICENSE) file.
