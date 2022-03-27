@@ -101,9 +101,25 @@ abstract class Autowiring {
 					continue; // Skip abstract classes, interfaces, traits & the container class itself.
 				}
 
+				// todo find classes by injected interface
+				//
+				//				if ( ! empty( $refl_class->getConstructor() ) && ! empty( $refl_class->getConstructor()->getParameters() ) ) {
+				//					foreach ( $refl_class->getConstructor()->getParameters() as $refl_param ) {
+				//						$refl_class_for_param = $refl_param->getClass();
+				//						if ( $refl_class_for_param->isInterface() ) {
+				//							fwrite( STDERR, print_r([
+				//								'name' => $refl_class->getName(),
+				//								'param_name' =>  $refl_param->getName(),
+				//								'param_class' =>  $refl_class_for_param
+				//							], true) );
+				//						}
+				//					}
+				//				}
+
 				$relevant_classes[] = $class;
 			}
 		}
+
 		return $relevant_classes;
 	}
 }

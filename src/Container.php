@@ -71,7 +71,7 @@ abstract class Container extends Autowiring {
 		$this->namespace = $config['namespace'] ?? '';
 		$this->cache_folder = $config['cache_folder'] ?? static::BUILD;
 		$this->environment = $config['environment'] ?? static::DEV;
-		$this->path = \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
+		$this->path = $config['path'] ?? \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
 		$this->container = new \Dice\Dice();
 	}
 

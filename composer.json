@@ -1,7 +1,7 @@
 {
   "name": "pangolia/container",
   "description": "A Dice wrapper to auto-register and auto-instantiate objects.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://pangolia.com",
   "scripts": {
     "phpcs": "./vendor/bin/phpcs --standard=./phpcs.xml",
@@ -12,8 +12,15 @@
       "Pangolia\\Container\\": "src/"
     }
   },
+  "autoload-dev": {
+    "classmap": ["src/"],
+    "psr-4": {
+      "Pangolia\\ContainerTests\\": "tests/",
+      "Pangolia\\ContainerTests\\Mocks\\": "tests/mocks/"
+    }
+  },
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.4",
     "level-2/dice": "^4.0"
   },
   "require-dev": {
@@ -22,7 +29,9 @@
     "automattic/phpcs-neutron-ruleset": "^3.3",
     "phpcompatibility/phpcompatibility-wp": "^2.1",
     "szepeviktor/phpstan-wordpress": "^0.7.5",
-    "php-stubs/wordpress-stubs": "^5.7"
+    "php-stubs/wordpress-stubs": "^5.7",
+    "brain/monkey": "~2.0.0",
+    "phpunit/phpunit": "^9"
   },
   "license": "BSD-2-Clause",
   "authors": [
@@ -31,5 +40,11 @@
       "email": "brandon@pangolia.com",
       "homepage": "https://pangolia.com"
     }
-  ]
+  ],
+  "config": {
+    "platform": {
+      "php": "7.4"
+    },
+    "platform-check": false
+  }
 }
