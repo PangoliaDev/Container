@@ -4,9 +4,6 @@ namespace Pangolia\ContainerTests\Unit;
 
 use Pangolia\ContainerTests\Mocks;
 
-/**
- * Start tests with command "vendor/bin/phpunit" or use "run" by PHPStorm
- */
 class ContainerTest extends ContainerTestCase {
 
 	public function testIfContainerIsHooked() {
