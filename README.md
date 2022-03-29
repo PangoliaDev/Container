@@ -87,23 +87,20 @@ Combined with Dice's autowiring functionalities + Composer's Autoloader:
 - All classes inside the namespace hierarchies will be automatically instantiated and registered when creating and adding new classes & files
 - All dependencies will be automatically injected 
 
-When instantiating the container you have to pass 2 arguments:
-- ``$config``(array): An array of configurations
-  - ``namespace``(string): Your project namespace
-  - ``environment``(string): ("dev" or "prod") To set the project's environment (optional: default set to "dev")
-  - ``cache_folder``(string): To set the project's cache folder (optional: default set to "build")
+When instantiating the container you have to pass 1 argument:
 - ``$psr4_prefixes``(array): Composer's PSR4 prefixes which you can get with the getPrefixesPsr4() method from Composer (see example below). This will make sure it will target the project's full folder path to find all the project files.
+
+Then you can call these methods to configure the container 
+- ``set_namespace``(string): Your project namespace
+- ``set_environment``(string): ("dev" or "prod") To set the project's environment (optional: default set to "dev")
+- ``set_cache_folder``(string): To set the project's cache folder (optional: default set to "build")
 ````php
 $composer = ( require 'vendor/autoload.php' )->getPrefixesPsr4();
 
-( $container = new \ProjectNamespace\Container( 
-    [
-        'namespace'    => 'ProjectNamespace',
-        'environment'  => 'dev',
-        'cache_folder' => 'build'
-    ],
-    $composer
- ) )->register();
+( $container = new \ProjectNamespace\Container( $composer ) )
+ ->set_namespace( 'ProjectNamespace' )
+ ->set_environment( 'dev' )
+ ->register();
 
 
 // Example of getting an object instance

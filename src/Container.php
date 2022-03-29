@@ -62,17 +62,66 @@ abstract class Container extends Autowiring {
 	/**
 	 * Constructor
 	 *
-	 * @param array<string, mixed> $config
 	 * @param array<string, mixed> $psr4_prefixes
+	 * @param array<string, mixed> $config
+	 *
 	 * @since 0.1.0
 	 */
-	public function __construct( array $config, array $psr4_prefixes ) {
+	public function __construct( array $psr4_prefixes, array $config ) {
 		$this->psr4_prefixes = $psr4_prefixes;
 		$this->namespace = $config['namespace'] ?? '';
 		$this->cache_folder = $config['cache_folder'] ?? static::BUILD;
 		$this->environment = $config['environment'] ?? static::DEV;
 		$this->path = $config['path'] ?? \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
 		$this->container = new \Dice\Dice();
+	}
+
+	/**
+	 * Set the namespace
+	 *
+	 * @param string $namespace
+	 * @return $this
+	 * @since 0.4.0
+	 */
+	public function set_namespace( string $namespace ): self {
+		$this->namespace = $namespace ?? '';
+		return $this;
+	}
+
+	/**
+	 * Set the environment
+	 *
+	 * @param string $env (prod|dev)
+	 * @return $this
+	 * @since 0.4.0
+	 */
+	public function set_environment( string $env ): self {
+		$this->environment = $env ?? static::DEV;
+		return $this;
+	}
+
+	/**
+	 * Set the cache folder (optional)
+	 *
+	 * @param string $cache_folder
+	 * @return $this
+	 * @since 0.4.0
+	 */
+	public function set_cache_folder( string $cache_folder ): self {
+		$this->cache_folder = $cache_folder ?? static::BUILD;
+		return $this;
+	}
+
+	/**
+	 * Override composer's path (optional)
+	 *
+	 * @param string $path
+	 * @return $this
+	 * @since 0.4.0
+	 */
+	public function set_path( string $path ): self {
+		$this->path = $path ?? \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
+		return $this;
 	}
 
 	/**

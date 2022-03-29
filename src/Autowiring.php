@@ -90,6 +90,10 @@ abstract class Autowiring {
 		$relevant_classes = [];
 
 		foreach ( $this->psr4_classes as $class ) {
+			if ( strpos( $class, '\\Tests\\' ) !== false ) {
+				continue; // Skip test classes
+			}
+
 			if ( \class_exists( $class ) ) {
 				$refl_class = new \ReflectionClass( $class );
 				if (

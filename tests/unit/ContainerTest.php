@@ -35,6 +35,10 @@ class ContainerTest extends ContainerTestCase {
 		$this->assertEquals( 1, $GLOBALS['container'][ Mocks\TestComponentC::class ]['instances'] );
 		$this->assertEquals( 3, $GLOBALS['container'][ Mocks\Modules\ModuleA\TestModuleAComponentA::class ]['instances'] );
 		$this->assertEquals( 1, $GLOBALS['container'][ Mocks\Modules\ModuleA\TestModuleAComponentB::class ]['instances'] );
+
+		// Test folders needs to be skipped
+		$this->assertEquals( 0, $GLOBALS['container'][ Mocks\Modules\ModuleA\Tests\TestExampleModuleA::class ]['instances'] );
+		$this->assertEquals( 0, $GLOBALS['container'][ Mocks\Modules\ModuleA\Tests\TestExampleModuleB::class ]['instances'] );
 	}
 
 	public function testInstanceOfClasses() {
