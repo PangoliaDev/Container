@@ -41,11 +41,10 @@ class ContainerTestCase extends TestCase {
 	public function setUpContainer() {
 		$this->getPsr4Classes();
 		$this->setInstanceState();
-		$this->container = new TestContainerMock( [
-			'namespace'   => $this->namespace,
-			'environment' => 'dev',
-			'path'        => PANGOLIA_DIR,
-		], COMPOSER_PREFIXES );
+		$this->container = new TestContainerMock(COMPOSER_PREFIXES );
+		$this->container->set_namespace($this->namespace);
+		$this->container->set_environment('dev');
+		$this->container->set_path(PANGOLIA_DIR);
 		$this->container->register();
 		$this->container->register_services();
 	}

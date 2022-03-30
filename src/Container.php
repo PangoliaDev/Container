@@ -67,7 +67,7 @@ abstract class Container extends Autowiring {
 	 *
 	 * @since 0.1.0
 	 */
-	public function __construct( array $psr4_prefixes, array $config ) {
+	public function __construct( array $psr4_prefixes, array $config = [] ) {
 		$this->psr4_prefixes = $psr4_prefixes;
 		$this->namespace = $config['namespace'] ?? '';
 		$this->cache_folder = $config['cache_folder'] ?? static::BUILD;
@@ -238,7 +238,7 @@ abstract class Container extends Autowiring {
 	 * @since 0.1.0
 	 */
 	private function get_cache_path(): string {
-		return \trailingslashit( $this->path ) . \trailingslashit( $this->cache_folder ) . $this::CACHE_FOLDER;
+		return \trailingslashit( $this->path ) . \trailingslashit( $this->cache_folder ) . static::CACHE_FOLDER;
 	}
 
 	/**
@@ -270,8 +270,7 @@ abstract class Container extends Autowiring {
 	 */
 	private function set_cache( string $path, $callback, string $file ) {
 		if ( ! \is_dir( $path ) ) {
-			\mkdir( $path );
-			\chmod( $path, 0777 );
+			\mkdir( $path, 0777, true );
 		}
 
 		$data = \is_callable( $callback )

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="Pangolia ruleset">
-    <description>Ruleset for pangolia/container.</description>
+    <description>Ruleset for pangolia.</description>
 
     <file>src/</file>
 
