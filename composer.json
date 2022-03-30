@@ -1,7 +1,7 @@
 {
   "name": "pangolia/container",
   "description": "A Dice wrapper to auto-register and auto-instantiate objects.",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "homepage": "https://pangolia.com",
   "scripts": {
     "phpcs": "./vendor/bin/phpcs --standard=./phpcs.xml",

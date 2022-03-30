@@ -67,12 +67,8 @@ abstract class Container extends Autowiring {
 	 *
 	 * @since 0.1.0
 	 */
-	public function __construct( array $psr4_prefixes, array $config = [] ) {
+	public function __construct( array $psr4_prefixes ) {
 		$this->psr4_prefixes = $psr4_prefixes;
-		$this->namespace = $config['namespace'] ?? '';
-		$this->cache_folder = $config['cache_folder'] ?? static::BUILD;
-		$this->environment = $config['environment'] ?? static::DEV;
-		$this->path = $config['path'] ?? \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
 		$this->container = new \Dice\Dice();
 	}
 
@@ -85,6 +81,7 @@ abstract class Container extends Autowiring {
 	 */
 	public function set_namespace( string $namespace ): self {
 		$this->namespace = $namespace ?? '';
+		$this->path = $this->path ?? \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
 		return $this;
 	}
 
@@ -120,7 +117,7 @@ abstract class Container extends Autowiring {
 	 * @since 0.4.0
 	 */
 	public function set_path( string $path ): self {
-		$this->path = $path ?? \dirname( $this->psr4_prefixes[ $this->namespace . '\\' ][0] ?? '' );
+		$this->path = $path;
 		return $this;
 	}
 
